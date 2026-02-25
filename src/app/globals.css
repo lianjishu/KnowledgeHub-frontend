@@ -1,0 +1,185 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ===============================
+   设计系统 - 小米 MiMo 风格
+   =============================== */
+
+/* 亮色主题变量 (默认 - 不加类时) */
+:root {
+  /* 主色调 - 纯净白 */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f8f8;
+  --color-bg-card: #ffffff;
+  --color-bg-hover: #f0f0f0;
+
+  /* 强调色 - 小米橙/科技蓝渐变 */
+  --color-accent-primary: #ff6900;
+  --color-accent-secondary: #0066ff;
+  --color-accent-gradient: linear-gradient(135deg, #ff6900 0%, #0066ff 100%);
+
+  /* 文字色彩 */
+  --color-text-primary: #0a0a0a;
+  --color-text-secondary: rgba(10, 10, 10, 0.6);
+  --color-text-muted: rgba(10, 10, 10, 0.4);
+  --color-text-inverse: #ffffff;
+
+  /* 边框与分割 */
+  --color-border: rgba(10, 10, 10, 0.1);
+  --color-divider: rgba(10, 10, 10, 0.05);
+
+  /* 间距系统 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* 微妙的辉光效果 */
+  --shadow-glow: 0 0 40px rgba(255, 105, 0, 0.2);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* 暗色主题变量 (加 .dark 类时) */
+.dark {
+  /* 主色调 - 深邃科技黑 */
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #111111;
+  --color-bg-card: #1a1a1a;
+  --color-bg-hover: #222222;
+
+  /* 文字色彩 */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+  --color-text-muted: rgba(255, 255, 255, 0.4);
+  --color-text-inverse: #0a0a0a;
+
+  /* 边框与分割 */
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-divider: rgba(255, 255, 255, 0.05);
+
+  /* 微妙的辉光效果 */
+  --shadow-glow: 0 0 40px rgba(255, 105, 0, 0.15);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Tailwind CSS v4 主题配置 */
+@theme inline {
+  --color-background: var(--color-bg-primary);
+  --color-foreground: var(--color-text-primary);
+  --color-card: var(--color-bg-card);
+  --color-card-foreground: var(--color-text-primary);
+  --color-popover: var(--color-bg-secondary);
+  --color-popover-foreground: var(--color-text-primary);
+  --color-primary: #ff6900;
+  --color-primary-foreground: var(--color-text-inverse);
+  --color-secondary: var(--color-bg-card);
+  --color-secondary-foreground: var(--color-text-primary);
+  --color-muted: var(--color-bg-secondary);
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-accent: var(--color-bg-card);
+  --color-accent-foreground: var(--color-text-primary);
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: var(--color-border);
+  --color-input: var(--color-bg-card);
+  --color-ring: #ff6900;
+
+  --font-sans: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* ===============================
+   全局样式
+   =============================== */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] antialiased transition-colors duration-300;
+  }
+
+  /* 自定义滚动条 - 暗色 */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+  }
+}
+
+@layer utilities {
+  /* 渐变文字 */
+  .text-gradient {
+    background: linear-gradient(135deg, #ff6900 0%, #0066ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* 辉光效果 */
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-glow-hover:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* 按钮辉光 */
+  .btn-glow {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 30px rgba(255, 105, 0, 0.3);
+  }
+
+  /* 大号英雄文字 */
+  .text-hero {
+    font-size: clamp(3rem, 10vw, 6rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .text-hero-sm {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+}
